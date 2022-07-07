@@ -1,7 +1,7 @@
 using System.Net.Mime;
 using System.Text.Json;
-using Catalog.Repositories;
-using Catalog.Settings;
+using Catalog.API.Repositories;
+using Catalog.API.Settings;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -17,14 +17,14 @@ BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String))
 // Add services to the container.
 builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
 {
-  return new MongoClient(mongoDbSettings.ConnectionString);
+    return new MongoClient(mongoDbSettings.ConnectionString);
 });
 
 builder.Services.AddSingleton<IItemsRepository, MongoDbItemsRepository>();
 
 builder.Services.AddControllers(options =>
 {
-  options.SuppressAsyncSuffixInActionNames = false;
+    options.SuppressAsyncSuffixInActionNames = false;
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -43,44 +43,44 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-  app.UseSwagger();
-  app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 if (app.Environment.IsDevelopment())
 {
-  app.UseHttpsRedirection();
+    app.UseHttpsRedirection();
 }
 
 
 app.MapHealthChecks("/health/ready", new HealthCheckOptions
 {
-  Predicate = (check) => check.Tags.Contains("ready"),
-  ResponseWriter = async (context, report) =>
-  {
-    var result = JsonSerializer.Serialize(
-      new
-      {
-        status = report.Status.ToString(),
-        checks = report.Entries.Select(entry => new
+    Predicate = (check) => check.Tags.Contains("ready"),
+    ResponseWriter = async (context, report) =>
+    {
+        var result = JsonSerializer.Serialize(
+        new
         {
-          name = entry.Key,
-          status = entry.Value.Status.ToString(),
-          exception = entry.Value.Exception != null
-          ? entry.Value.Exception.Message
-          : null,
-          duration = entry.Value.Duration.ToString(),
-        })
-      }
-    );
-    context.Response.ContentType = MediaTypeNames.Application.Json;
-    await context.Response.WriteAsync(result);
-  }
+            status = report.Status.ToString(),
+            checks = report.Entries.Select(entry => new
+            {
+                name = entry.Key,
+                status = entry.Value.Status.ToString(),
+                exception = entry.Value.Exception != null
+            ? entry.Value.Exception.Message
+            : null,
+                duration = entry.Value.Duration.ToString(),
+            })
+        }
+      );
+        context.Response.ContentType = MediaTypeNames.Application.Json;
+        await context.Response.WriteAsync(result);
+    }
 });
 
 app.MapHealthChecks("/health/live", new HealthCheckOptions
 {
-  Predicate = (_) => false
+    Predicate = (_) => false
 });
 
 

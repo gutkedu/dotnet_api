@@ -1,4 +1,4 @@
-namespace Catalog.DTOs
+namespace Catalog.API.DTOs
 {
     public record ItemDTO
     {
