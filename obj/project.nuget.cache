@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "fxwKK9U8KnziiI/DTsy0yIiauvNiZ9Z+7DEmy9vsKN2T/T+82bwjBvz+Jcdij/7K8X+b4mztvRLuUa7Zeh36TA==",
+  "success": true,
+  "projectFilePath": "/home/gutkedu/Programming/dotnet_study/build.proj",
+  "expectedPackageFiles": [
+    "/home/gutkedu/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.2/microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
+    "/home/gutkedu/.nuget/packages/microsoft.netframework.referenceassemblies.net45/1.0.2/microsoft.netframework.referenceassemblies.net45.1.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
