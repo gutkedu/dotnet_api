@@ -8,9 +8,10 @@ in .NET using principles of clean architecture.
 - .NET 6
 - MongoDB
 - XUnit
-- Moq]
+- Moq
 - Docker
 - Minikube
+- Documentation with Swagger
 
 The application was containerized with Docker with the following commands:
 
@@ -29,3 +30,7 @@ docker run -d --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db -e MONGO_
 Then, the catalog container was uploaded to DockerHub to allow the use of Kubernetes. For this project, I utilized a Kubernetes application that runs locally on my computer, called Minikube.
 
 The application Unit tests were done utilizing the Xunit framework.
+
+## Documentation in Swagger accessing localhost:port/swagger
+
+<img src="./.github/catalogAPI.jpeg" style="width: 80%">
